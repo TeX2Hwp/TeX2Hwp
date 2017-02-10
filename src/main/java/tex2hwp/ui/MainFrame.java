@@ -2,6 +2,7 @@ package tex2hwp.ui;
 
 import net.sourceforge.jeuclid.swing.JMathComponent;
 import tex2hwp.core.ClipboardManager;
+import tex2hwp.core.HwpConverter;
 import tex2hwp.core.TeXParser;
 
 import javax.swing.*;
@@ -14,6 +15,7 @@ import java.io.StringWriter;
 public class MainFrame extends JFrame {
     ClipboardManager clipboardManager;
     TeXParser parser;
+    HwpConverter converter;
 
     JMathComponent mathRenderer;
     JTextArea mlText;
@@ -55,10 +57,12 @@ public class MainFrame extends JFrame {
 
         // init widgets
         mathRenderer = new JMathComponent();
-        mathRenderer.setPreferredSize(mathRendererSize);
-        mathRenderer.setMinimumSize(mathRendererSize);
 
-        mlText = new JTextArea("(Math ML)");
+        JScrollPane mathScroll = new JScrollPane(mathRenderer);
+        mathScroll.setPreferredSize(mathRendererSize);
+        mathScroll.setMinimumSize(mathRendererSize);
+
+        mlText = new JTextArea("Math ML이 표시됩니다.");
         mlText.setLineWrap(true);
         mlText.setEditable(false);
 
@@ -66,7 +70,7 @@ public class MainFrame extends JFrame {
         mlScroll.setPreferredSize(resultTextSize);
         mlScroll.setMinimumSize(resultTextSize);
 
-        hwpText = new JTextArea("(Hwp formula)");
+        hwpText = new JTextArea("Hwp 수식이 표시됩니다.");
         hwpText.setLineWrap(true);
         hwpText.setEditable(false);
 
@@ -74,7 +78,7 @@ public class MainFrame extends JFrame {
         hwpScroll.setPreferredSize(resultTextSize);
         hwpScroll.setMinimumSize(resultTextSize);
 
-        inputField = new JTextArea("\\sqrt{2} + 3");
+        inputField = new JTextArea("\\int_{0}^{\\infty} e^{-x^2} dx = \\frac{\\sqrt{\\pi}}{2}");
 
         JScrollPane inputScroll = new JScrollPane(inputField);
         inputScroll.setPreferredSize(inputFieldSize);
@@ -93,7 +97,7 @@ public class MainFrame extends JFrame {
         textPanel.add(hwpScroll);
 
         // set resultPanel
-        resultPanel.add(mathRenderer);
+        resultPanel.add(mathScroll);
         resultPanel.add(textPanel);
 
         // set controlPanel
@@ -124,6 +128,7 @@ public class MainFrame extends JFrame {
     private void initCore() {
         clipboardManager = new ClipboardManager();
         parser = new TeXParser();
+        converter = new HwpConverter();
     }
 
     private void initCallbacks() {
@@ -140,26 +145,29 @@ public class MainFrame extends JFrame {
             // read input
             String tex = inputField.getText();
 
-            // parse tex formula
+            // parse tex -> generate ml
             parser.parse("\\[" + tex + "\\]");
 
-            // render
-            mathRenderer.setDocument(parser.getMlDom());
+            // parse ml -> generate hwp
+            String hwp = converter.convertNode(parser.getMlDom());
 
             // show the results
+            mathRenderer.setDocument(parser.getMlDom());
             mlText.setText(parser.getMlString());
+            hwpText.setText(hwp);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             PrintWriter pw = new PrintWriter(sw);
             e.printStackTrace(pw);
-            popMsg("An error occurred :\n" + sw.toString());
+            popMsg("에러가 발생했습니다.\n\n- 에러 메시지 :\n" + e.getMessage() +
+                    "\n\n- 스택 추적 :\n" + sw.toString());
         }
     }
 
     private void onCopyButtonClicked() {
         String hwp = hwpText.getText();
         clipboardManager.copyString(hwp);
-        popMsg("Hwp formula is copied to clipboard.");
+        popMsg("Hwp 수식이 클립보드에 복사되었습니다.");
     }
 
     private void popMsg(String msg) {
