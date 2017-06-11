@@ -3,10 +3,19 @@ package tex2hwp.core;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * MathML-to-Hwp converter.
+ */
 public class HwpConverter {
     public HwpConverter() {
     }
 
+    /**
+     * Convert a MathML node to Hwp string.
+     *
+     * @param node MathML node
+     * @return result string
+     */
     public String convertNode(Node node) {
         String type = node.getNodeName();
         String value = node.getTextContent();
@@ -62,6 +71,12 @@ public class HwpConverter {
         }
     }
 
+    /**
+     * Convert a list of MathML nodes to a Hwp string.
+     *
+     * @param nodes list of MathML nodes
+     * @return result string
+     */
     public String convertNodeList(NodeList nodes) {
         StringBuilder builder = new StringBuilder();
         int nodeCount = nodes.getLength();

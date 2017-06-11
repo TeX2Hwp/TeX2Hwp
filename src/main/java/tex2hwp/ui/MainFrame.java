@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+/**
+ * Simple UI based on Swing.
+ */
 public class MainFrame extends JFrame {
     ClipboardManager clipboardManager;
     TeXParser parser;
