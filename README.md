@@ -5,6 +5,8 @@ A simple TeX-to-Hwp converter written in Java.
 This project is just a proof-of-concept. It supports just a few
 TeX math commands now.
 
+(Project for KAIST CS495 'Individual research')
+
 ### Requirements
 - JDK (Recommended : 1.7 ~)
 
