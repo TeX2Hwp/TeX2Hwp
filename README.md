@@ -7,15 +7,20 @@ TeX math commands now.
 
 (Project for KAIST CS495 'Individual research')
 
+### How to use
+- Run `java -jar TeX2Hwp.jar` to run the program.
+- Open the .iml file on [IntelliJ IDEA](https://www.jetbrains.com/idea/) and run `Build - Build Artifacts` to build the program.
+
 ### Requirements
-- JDK (Recommended : 1.7 ~)
+- JDK (Recommended : 1.7 ~ 1.8)
+- Test on 2020.08: Does not work on recent JDK. (ex. Java 11) :disappointed:
 
 ### Libraries I used
 - [JEuclid](http://jeuclid.sourceforge.net/)
 - [SnuggleTeX](http://www2.ph.ed.ac.uk/snuggletex/documentation/overview-and-features.html)
 
-### Screenshots
-![TeX2Hwp](http://i63.tinypic.com/30mb7ld.png)
+### Screenshot
+![Screenshot](https://github.com/TeX2Hwp/TeX2Hwp/blob/master/Screenshot.png)
 
 ### How to use the core module
 Instead of running the ```.jar``` file directly, you can write a
