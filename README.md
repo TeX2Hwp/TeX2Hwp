@@ -9,17 +9,17 @@ TeX math commands now.
 
 ### How to use
 - Run `java -jar TeX2Hwp.jar` to run the program.
-- Open the .iml file on [IntelliJ IDEA](https://www.jetbrains.com/idea/) and run `build artifacts` to build the program.
+- Open the .iml file on [IntelliJ IDEA](https://www.jetbrains.com/idea/) and run `Build - Build Artifacts` to build the program.
 
 ### Requirements
 - JDK (Recommended : 1.7 ~ 1.8)
-- Test on 2020.08: Does not work on recent JDK :disappointed: (ex. Java 11).
+- Test on 2020.08: Does not work on recent JDK. (ex. Java 11) :disappointed:
 
 ### Libraries I used
 - [JEuclid](http://jeuclid.sourceforge.net/)
 - [SnuggleTeX](http://www2.ph.ed.ac.uk/snuggletex/documentation/overview-and-features.html)
 
-### Screenshots
+### Screenshot
 ![Screenshot](https://github.com/TeX2Hwp/TeX2Hwp/blob/master/Screenshot.png)
 
 ### How to use the core module
