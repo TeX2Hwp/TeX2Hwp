@@ -8,6 +8,9 @@ import uk.ac.ed.ph.snuggletex.SnuggleSession;
 
 import java.io.IOException;
 
+/**
+ * TeX-to-ML parser.
+ */
 public class TeXParser {
     private final SnuggleEngine engine;
     private final SessionConfiguration configuration;
@@ -22,6 +25,12 @@ public class TeXParser {
         configuration.setFailingFast(true);
     }
 
+    /**
+     * Parse a TeX string and generate a MathML node.
+     *
+     * @param tex TeX formula
+     * @throws IOException if an error occurs during parsing
+     */
     public void parse(String tex) throws IOException {
         SnuggleSession session = engine.createSession(configuration);
         SnuggleInput input = new SnuggleInput(tex);
